@@ -8,4 +8,5 @@ const StyledLogo = styled.h1`
 	font-family: 'Saira Stencil One', cursive;
 	font-size: 32px;
 	color: rgb(255, 255, 255);
+	margin-bottom: 25px;
 `;

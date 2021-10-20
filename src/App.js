@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import routes from './routes/routes';
+import Login from './routes/login';
 
 function App() {
 	return (
@@ -14,7 +15,9 @@ function App() {
 
 				<Route exact path={routes.expenses}></Route>
 
-				<Route path={routes.login}></Route>
+				<Route path={routes.login}>
+					<Login />
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);

@@ -1,9 +1,9 @@
 const routes = {
 	login: '/',
-	signUp: '/sign-up',
-	transactions: '/transactions',
-	income: '/income',
-	expenses: '/expenses',
+	signUp: '/cadastrar',
+	transactions: '/extrato',
+	income: '/nova-entrada',
+	expenses: '/nova-saida',
 };
 
 export default routes;
