@@ -1,10 +1,10 @@
-import Logo from '../components/logo';
+import Logo from '../components/Logo';
 import { PageContainer } from '../components/Containers';
 import CustomForm from '../components/inputs/CustomForm';
 import FakeLink from '../components/FakeLink';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import routes from '../routes/routes';
+import routes from './routes';
 import { postSignUp } from '../services/api';
 import statusCode from '../services/statusCode';
 

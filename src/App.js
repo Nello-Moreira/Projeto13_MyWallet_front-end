@@ -1,10 +1,16 @@
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import routes from './routes/routes';
-import Login from './routes/login';
-import SignUp from './routes/signUp';
+import Login from './routes/Login';
+import SignUp from './routes/SignUp';
+import IncomePage from './routes/IncomePage';
+import ExpensesPage from './routes/ExpensesPage';
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import { useState } from 'react';
 
 function App() {
+	const [user, setUser] = useState({ userId: '', token: '' });
 	return (
 		<BrowserRouter>
 			<Switch>
@@ -14,12 +20,16 @@ function App() {
 
 				<Route exact path={routes.transactions}></Route>
 
-				<Route exact path={routes.income}></Route>
+				<Route exact path={routes.income}>
+					<IncomePage user={user} />
+				</Route>
 
-				<Route exact path={routes.expenses}></Route>
+				<Route exact path={routes.expenses}>
+					<ExpensesPage user={user} />
+				</Route>
 
 				<Route path={routes.login}>
-					<Login />
+					<Login setUser={setUser} />
 				</Route>
 			</Switch>
 		</BrowserRouter>
