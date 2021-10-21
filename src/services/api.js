@@ -9,4 +9,6 @@ const axiosBase = axios.create({
 
 const postLogin = data => axiosBase.post('/login', data);
 
-export { postLogin };
+const postSignUp = data => axiosBase.post('/sign-up', data);
+
+export { postLogin, postSignUp };

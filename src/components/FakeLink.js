@@ -6,7 +6,10 @@ export default function FakeLink({ to, loading, children }) {
 	const history = useHistory();
 
 	return (
-		<LinkStyle onClick={() => history.push(to)} loading={loading}>
+		<LinkStyle
+			onClick={loading ? null : () => history.push(to)}
+			loading={loading}
+		>
 			{children}
 		</LinkStyle>
 	);
@@ -21,7 +24,8 @@ const LinkStyle = styled.a`
 	cursor: ${({ loading }) => (loading ? 'default' : 'pointer')};
 
 	:hover {
-		filter: brightness(1.5);
+		filter: ${({ loading }) =>
+			loading ? 'brightness(1)' : 'brightness(1.5)'};
 	}
 
 	:visited {

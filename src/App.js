@@ -2,12 +2,15 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import routes from './routes/routes';
 import Login from './routes/login';
+import SignUp from './routes/signUp';
 
 function App() {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path={routes.signUp}></Route>
+				<Route exact path={routes.signUp}>
+					<SignUp />
+				</Route>
 
 				<Route exact path={routes.transactions}></Route>
 
