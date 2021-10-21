@@ -1,8 +1,6 @@
 import Logo from '../components/logo';
 import { PageContainer } from '../components/Containers';
 import CustomForm from '../components/inputs/CustomForm';
-import CustomInput from '../components/inputs/CustomInput';
-import StandardButton from '../components/buttons/StandardButton';
 import FakeLink from '../components/FakeLink';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -11,43 +9,68 @@ import { postSignUp } from '../services/api';
 import statusCode from '../services/statusCode';
 
 export default function SignUp() {
-	const [inputs, setInputs] = useState({
-		email: '',
-		password: '',
-		passwordCheck: '',
-		name: '',
-	});
 	const [loading, setLoading] = useState(false);
-	const history = useHistory();
-
-	function inputModifier(event, fieldName) {
-		inputs[fieldName] = event.target.value;
-		setInputs({ ...inputs });
-	}
+	const [inputs, setInputs] = useState([
+		{
+			field: 'name',
+			type: 'text',
+			value: '',
+			placeholder: 'Nome',
+		},
+		{ field: 'email', type: 'email', value: '', placeholder: 'Email' },
+		{
+			field: 'password',
+			type: 'password',
+			value: '',
+			placeholder: 'Senha',
+		},
+		{
+			field: 'passwordCheck',
+			type: 'password',
+			value: '',
+			placeholder: 'Confirme a senha',
+		},
+	]);
 
 	function formSubmit(event) {
 		setLoading(true);
 
 		event.preventDefault();
 
-		if (!samePassword(inputs.password, inputs.passwordCheck)) {
-			setInputs({ ...inputs, password: '', passwordCheck: '' });
+		const password = inputs.find(inp => inp.field === 'password');
+		const passwordCheck = inputs.find(inp => inp.field === 'passwordCheck');
+
+		if (!samePassword(password.value, passwordCheck.value)) {
+			const newInputsState = inputs.map(inp => {
+				if (inp.field === 'password' || inp.field === 'passwordCheck') {
+					inp.value = '';
+				}
+				return inp;
+			});
+
+			setInputs(newInputsState);
+			setLoading(false);
+
 			alert(
 				'As senhas inseridas não conferem. Por favor, insira as senhas novamente.'
 			);
-			setLoading(false);
 			return;
 		}
 
-		postSignUp(inputs)
+		const name = inputs.find(inp => inp.field === 'name').value;
+		const email = inputs.find(inp => inp.field === 'email').value;
+
+		postSignUp({ name, email, password: password.value })
 			.then(response => {
 				alert('Usuário cadastrado com sucesso.');
-				setInputs({
-					email: '',
-					password: '',
-					passwordCheck: '',
-					name: '',
+
+				const newInputsState = inputs.map(inp => {
+					inp.value = '';
+					return inp;
 				});
+
+				setInputs(newInputsState);
+
 				setLoading(false);
 			})
 			.catch(error => {
@@ -56,6 +79,10 @@ export default function SignUp() {
 				switch (error.response.status) {
 					case statusCode.badRequest:
 						text = 'Email ou senha inválido';
+						break;
+
+					case statusCode.conflict:
+						text = 'Este e-mail já está em uso';
 						break;
 
 					default:
@@ -72,59 +99,11 @@ export default function SignUp() {
 		<PageContainer>
 			<Logo />
 
-			<CustomForm onSubmit={formSubmit}>
-				<CustomInput
-					value={inputs.name}
-					onChange={
-						loading ? null : event => inputModifier(event, 'name')
-					}
-					placeholder='Nome'
-					loading={loading}
-					type='text'
-					required
-				/>
-
-				<CustomInput
-					value={inputs.email}
-					onChange={
-						loading ? null : event => inputModifier(event, 'email')
-					}
-					placeholder='Email'
-					loading={loading}
-					type='email'
-					required
-				/>
-
-				<CustomInput
-					value={inputs.password}
-					onChange={
-						loading
-							? null
-							: event => inputModifier(event, 'password')
-					}
-					placeholder='Senha'
-					loading={loading}
-					type='password'
-					required
-				/>
-
-				<CustomInput
-					value={inputs.passwordCheck}
-					onChange={
-						loading
-							? null
-							: event => inputModifier(event, 'passwordCheck')
-					}
-					placeholder='Confirme sua senha'
-					loading={loading}
-					type='password'
-					required
-				/>
-
-				<StandardButton type='submit' loading={loading}>
-					Cadastrar
-				</StandardButton>
-			</CustomForm>
+			<CustomForm
+				formInfos={inputs}
+				formSubmit={formSubmit}
+				saveInputsState={setInputs}
+			/>
 
 			<FakeLink to={routes.login} loading={loading}>
 				Já tem uma conta? Entre agora!

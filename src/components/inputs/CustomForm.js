@@ -1,12 +1,48 @@
-import styled from 'styled-components';
+import FormStyle from './FormStyle';
+import InputStyle from './InputStyle';
+import StandardButton from '../buttons/StandardButton';
 
-const CustomForm = styled.form`
-	width: 100%;
-	max-width: 750px;
+import { useState } from 'react';
 
-	> * {
-		margin: 0 0 15px;
-	}
-`;
+export default function CustomForm({ formInfos, saveInputsState, formSubmit }) {
+	const [loading, setLoading] = useState(false);
 
-export default CustomForm;
+	const inputModifier = (event, field, changingInput) => {
+		changingInput.value = event.target.value;
+
+		const newInputsState = formInfos.map(input => {
+			if (input.field === field) return changingInput;
+			return input;
+		});
+
+		saveInputsState(newInputsState);
+	};
+
+	return (
+		<FormStyle onSubmit={formSubmit}>
+			{formInfos.map(formInput => (
+				<InputStyle
+					value={formInput.value}
+					onChange={
+						loading
+							? null
+							: event =>
+									inputModifier(
+										event,
+										formInput.field,
+										formInput
+									)
+					}
+					placeholder={formInput.placeholder}
+					loading={loading}
+					type={formInput.type}
+					required
+				/>
+			))}
+
+			<StandardButton type='submit' loading={loading}>
+				Entrar
+			</StandardButton>
+		</FormStyle>
+	);
+}

@@ -1,8 +1,6 @@
 import Logo from '../components/logo';
 import { PageContainer } from '../components/Containers';
 import CustomForm from '../components/inputs/CustomForm';
-import CustomInput from '../components/inputs/CustomInput';
-import StandardButton from '../components/buttons/StandardButton';
 import FakeLink from '../components/FakeLink';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -11,14 +9,17 @@ import { postLogin } from '../services/api';
 import statusCode from '../services/statusCode';
 
 export default function Login() {
-	const [inputs, setInputs] = useState({ email: '', password: '' });
-	const [loading, setLoading] = useState(false);
 	const history = useHistory();
-
-	function inputModifier(event, fieldName) {
-		inputs[fieldName] = event.target.value;
-		setInputs({ ...inputs });
-	}
+	const [loading, setLoading] = useState(false);
+	const [inputs, setInputs] = useState([
+		{ field: 'email', type: 'email', value: '', placeholder: 'Email' },
+		{
+			field: 'password',
+			type: 'password',
+			value: '',
+			placeholder: 'senha',
+		},
+	]);
 
 	function formSubmit(event) {
 		setLoading(true);
@@ -60,38 +61,22 @@ export default function Login() {
 	return (
 		<PageContainer>
 			<Logo />
-			<CustomForm onSubmit={formSubmit}>
-				<CustomInput
-					value={inputs.email}
-					onChange={
-						loading ? null : event => inputModifier(event, 'email')
-					}
-					placeholder='Email'
-					loading={loading}
-					type='email'
-					required
-				/>
 
-				<CustomInput
-					value={inputs.password}
-					onChange={
-						loading
-							? null
-							: event => inputModifier(event, 'password')
-					}
-					placeholder='Senha'
-					loading={loading}
-					type='password'
-					required
-				/>
+			<CustomForm
+				formInfos={inputs}
+				formSubmit={formSubmit}
+				saveInputsState={setInputs}
+			/>
 
-				<StandardButton type='submit' loading={loading}>
-					Entrar
-				</StandardButton>
-			</CustomForm>
 			<FakeLink to={routes.signUp} loading={loading}>
 				Primeira vez? Cadastre-se!
 			</FakeLink>
 		</PageContainer>
 	);
 }
+
+const saveUserAtLocalStorage = user =>
+	localStorage.setItem('MyWalletUser', JSON.stringify(user));
+
+const getUserFromLocalStorage = () =>
+	JSON.parse(localStorage.getItem('MyWalletUser'));

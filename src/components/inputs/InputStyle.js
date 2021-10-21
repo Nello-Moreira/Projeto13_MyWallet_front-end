@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CustomInput = styled.input`
+const InputStyle = styled.input`
 	box-sizing: border-box;
 	font-size: 20px;
 	color: ${({ loading }) => (loading ? 'rgb(175, 175, 175)' : 'rgb(0,0,0)')};
@@ -22,4 +22,4 @@ const CustomInput = styled.input`
 	}
 `;
 
-export default CustomInput;
+export default InputStyle;
