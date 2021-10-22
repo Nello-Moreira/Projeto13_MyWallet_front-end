@@ -3,9 +3,11 @@ import { PageContainer } from '../components/Containers';
 import CustomForm from '../components/inputs/CustomForm';
 import FakeLink from '../components/FakeLink';
 import CircleLoader from '../components/loaders/CircleLoader';
+
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import routes from './routes';
+
 import { postLogin } from '../services/api';
 import statusCode from '../services/statusCode';
 
@@ -90,9 +92,15 @@ export default function Login({ setUser }) {
 						formInfos={inputs}
 						formSubmit={formSubmit}
 						saveInputsState={setInputs}
+						loading={loading}
+						buttonText='Entrar'
 					/>
 
-					<FakeLink to={routes.signUp} loading={loading}>
+					<FakeLink
+						to={routes.signUp}
+						loading={loading}
+						customStyle={{ margin: '30px 0 0' }}
+					>
 						Primeira vez? Cadastre-se!
 					</FakeLink>
 				</>

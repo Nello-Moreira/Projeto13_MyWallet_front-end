@@ -2,11 +2,14 @@ import Logo from '../components/Logo';
 import { PageContainer } from '../components/Containers';
 import CustomForm from '../components/inputs/CustomForm';
 import FakeLink from '../components/FakeLink';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import routes from './routes';
+
+import { useState } from 'react';
+
 import { postSignUp } from '../services/api';
 import statusCode from '../services/statusCode';
+
+import { resetInputsValues } from '../helpers';
 
 export default function SignUp() {
 	const [loading, setLoading] = useState(false);
@@ -64,12 +67,7 @@ export default function SignUp() {
 			.then(response => {
 				alert('Usuário cadastrado com sucesso.');
 
-				const newInputsState = inputs.map(inp => {
-					inp.value = '';
-					return inp;
-				});
-
-				setInputs(newInputsState);
+				setInputs(resetInputsValues(inputs));
 
 				setLoading(false);
 			})
@@ -103,9 +101,15 @@ export default function SignUp() {
 				formInfos={inputs}
 				formSubmit={formSubmit}
 				saveInputsState={setInputs}
+				loading={loading}
+				buttonText='Cadastrar'
 			/>
 
-			<FakeLink to={routes.login} loading={loading}>
+			<FakeLink
+				to={routes.login}
+				loading={loading}
+				customStyle={{ margin: '30px 0 0' }}
+			>
 				Já tem uma conta? Entre agora!
 			</FakeLink>
 		</PageContainer>

@@ -4,6 +4,7 @@ import Login from './routes/Login';
 import SignUp from './routes/SignUp';
 import IncomePage from './routes/IncomePage';
 import ExpensesPage from './routes/ExpensesPage';
+import TransactionsPage from './routes/TransactionsPage';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -18,7 +19,9 @@ function App() {
 					<SignUp />
 				</Route>
 
-				<Route exact path={routes.transactions}></Route>
+				<Route exact path={routes.transactions}>
+					<TransactionsPage />
+				</Route>
 
 				<Route exact path={routes.income}>
 					<IncomePage user={user} />

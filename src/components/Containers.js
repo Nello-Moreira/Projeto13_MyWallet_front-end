@@ -4,11 +4,22 @@ const PageContainer = styled.div`
 	box-sizing: border-box;
 	width: 100%;
 	height: 100vh;
-	padding: 15px;
+	padding: 25px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: ${({ verticalAlignment }) =>
+		verticalAlignment || 'center'};
 `;
 
-export { PageContainer };
+const PageTitleContainer = styled.div`
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 750px;
+	margin-bottom: 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+export { PageContainer, PageTitleContainer };

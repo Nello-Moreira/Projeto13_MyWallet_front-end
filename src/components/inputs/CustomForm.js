@@ -4,9 +4,13 @@ import StandardButton from '../buttons/StandardButton';
 
 import { useState } from 'react';
 
-export default function CustomForm({ formInfos, saveInputsState, formSubmit }) {
-	const [loading, setLoading] = useState(false);
-
+export default function CustomForm({
+	formInfos,
+	saveInputsState,
+	formSubmit,
+	loading,
+	buttonText = 'Enviar',
+}) {
 	const inputModifier = (event, field, changingInput) => {
 		changingInput.value = event.target.value;
 
@@ -41,7 +45,7 @@ export default function CustomForm({ formInfos, saveInputsState, formSubmit }) {
 			))}
 
 			<StandardButton type='submit' loading={loading}>
-				Entrar
+				{buttonText}
 			</StandardButton>
 		</FormStyle>
 	);
