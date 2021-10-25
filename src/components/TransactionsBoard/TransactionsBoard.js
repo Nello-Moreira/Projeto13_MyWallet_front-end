@@ -35,14 +35,18 @@ export default function TransactionsBoard({ user }) {
 				setDates(serverDates);
 				setDescriptions(serverDescription);
 				setTransactionValues(serverValues);
-				setTotalBalance(
-					serverValues.reduce(
+
+				if (serverValues.length > 0) {
+					const newBalance = serverValues.reduce(
 						(previous, current) => previous + current
-					)
-				);
+					);
+
+					setTotalBalance(newBalance);
+				}
 				setLoading(false);
 			})
 			.catch(error => {
+				console.log(error);
 				alert(
 					'Não foi possível achar os dados das transações. Por favor, recarregue a página.'
 				);

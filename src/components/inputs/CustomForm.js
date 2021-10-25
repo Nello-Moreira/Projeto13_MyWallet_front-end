@@ -6,7 +6,7 @@ export default function CustomForm({
 	formInfos,
 	saveInputsState,
 	formSubmit,
-	loading,
+	loading = false,
 	buttonText = 'Enviar',
 }) {
 	const inputModifier = (event, field, changingInput) => {
