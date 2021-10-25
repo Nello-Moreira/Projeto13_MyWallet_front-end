@@ -26,8 +26,14 @@ const NoContentWarning = styled.div`
 const TransactionsContainer = styled.div`
 	height: 90%;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	overflow-y: auto;
+`;
+
+const TransactionLine = styled.div`
+	display: flex;
+	justify-content: space-between;
 `;
 
 const LeftColumn = styled.div`
@@ -73,6 +79,7 @@ export {
 	WhiteBoard,
 	NoContentWarning,
 	TransactionsContainer,
+	TransactionLine,
 	LeftColumn,
 	DateColumn,
 	DescriptionColumn,

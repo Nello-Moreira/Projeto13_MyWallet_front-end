@@ -1,50 +1,48 @@
 import {
 	TransactionsContainer,
+	TransactionLine,
 	LeftColumn,
 	DateColumn,
 	DescriptionColumn,
 	TransactionValueColumn,
 } from './TransactionsBoardStyles';
 
-export default function TransactionsInformations({
-	dates,
-	descriptions,
-	transactionValues,
-}) {
+export default function TransactionsInformations({ transactions }) {
+	const formatValue = value => {
+		if (value < 0) {
+			value *= -1;
+
+			return (
+				<p style={{ color: '#C70000' }}>
+					{value.toFixed(2).replace('.', ',')}
+				</p>
+			);
+		}
+		return (
+			<p style={{ color: '#03AC00' }}>
+				{value.toFixed(2).replace('.', ',')}
+			</p>
+		);
+	};
 	return (
 		<TransactionsContainer>
-			<LeftColumn>
-				<DateColumn>
-					{dates.map((date, i) => (
-						<p key={i}>{formatDate(date)}</p>
-					))}
-				</DateColumn>
+			{transactions.map((transaction, i) => (
+				<TransactionLine key={i}>
+					<LeftColumn>
+						<DateColumn>
+							<p>{formatDate(transaction.date)}</p>
+						</DateColumn>
 
-				<DescriptionColumn>
-					{descriptions.map((description, i) => (
-						<p key={i}>{description}</p>
-					))}
-				</DescriptionColumn>
-			</LeftColumn>
+						<DescriptionColumn>
+							<p>{transaction.description}</p>
+						</DescriptionColumn>
+					</LeftColumn>
 
-			<TransactionValueColumn>
-				{transactionValues.map((value, i) => {
-					if (value < 0) {
-						value *= -1;
-
-						return (
-							<p style={{ color: '#C70000' }} key={i}>
-								{value.toFixed(2).replace('.', ',')}
-							</p>
-						);
-					}
-					return (
-						<p style={{ color: '#03AC00' }} key={i}>
-							{value.toFixed(2).replace('.', ',')}
-						</p>
-					);
-				})}
-			</TransactionValueColumn>
+					<TransactionValueColumn>
+						{formatValue(Number(transaction.value))}
+					</TransactionValueColumn>
+				</TransactionLine>
+			))}
 		</TransactionsContainer>
 	);
 }
