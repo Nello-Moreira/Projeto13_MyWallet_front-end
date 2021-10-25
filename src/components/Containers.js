@@ -4,7 +4,7 @@ const PageContainer = styled.div`
 	box-sizing: border-box;
 	width: 100%;
 	height: 100vh;
-	padding: 25px 20px;
+	padding: 25px 20px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -22,4 +22,13 @@ const PageTitleContainer = styled.div`
 	align-items: center;
 `;
 
-export { PageContainer, PageTitleContainer };
+const ButtonsContainer = styled.div`
+	width: 100%;
+	margin-top: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: ${({ horizontalAlignment }) =>
+		horizontalAlignment || 'space-between'};
+`;
+
+export { PageContainer, PageTitleContainer, ButtonsContainer };

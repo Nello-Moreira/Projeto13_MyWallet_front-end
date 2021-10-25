@@ -24,7 +24,7 @@ export default function CustomForm({
 
 	return (
 		<FormStyle onSubmit={formSubmit}>
-			{formInfos.map(formInput => (
+			{formInfos.map((formInput, i) => (
 				<InputStyle
 					value={formInput.value}
 					onChange={
@@ -41,6 +41,7 @@ export default function CustomForm({
 					loading={loading}
 					type={formInput.type}
 					required
+					key={i}
 				/>
 			))}
 

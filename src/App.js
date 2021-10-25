@@ -11,7 +11,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 
 function App() {
-	const [user, setUser] = useState({ userId: '', token: '' });
+	const [user, setUser] = useState({ Name: '', userId: '', token: '' });
 	return (
 		<BrowserRouter>
 			<Switch>
@@ -20,7 +20,7 @@ function App() {
 				</Route>
 
 				<Route exact path={routes.transactions}>
-					<TransactionsPage />
+					<TransactionsPage user={user} />
 				</Route>
 
 				<Route exact path={routes.income}>

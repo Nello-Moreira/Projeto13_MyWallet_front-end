@@ -1,11 +1,29 @@
-import FakeLink from '../components/FakeLink';
-import routes from '../routes/routes';
+import {
+	PageContainer,
+	PageTitleContainer,
+	ButtonsContainer,
+} from '../components/Containers';
+import PageTitle from '../components/PageTitle';
+import TransactionsBoard from '../components/TransactionsBoard/TransactionsBoard';
+import AddIncomeButton from '../components/buttons/AddIncomeButton';
+import AddExpenseButton from '../components/buttons/AddExpenseButton';
+import LogoutButton from '../components/buttons/LogoutButton';
 
-export default function TransactionsPage() {
+export default function TransactionsPage({ user }) {
 	return (
-		<>
-			<FakeLink to={routes.income}>entradas</FakeLink>
-			<FakeLink to={routes.expenses}>saidas</FakeLink>
-		</>
+		<PageContainer verticalAlignment={'space-between'}>
+			<PageTitleContainer>
+				<PageTitle>{`Olá, ${user.name}`}</PageTitle>
+
+				<LogoutButton user={user} />
+			</PageTitleContainer>
+
+			<TransactionsBoard user={user} />
+
+			<ButtonsContainer>
+				<AddIncomeButton />
+				<AddExpenseButton />
+			</ButtonsContainer>
+		</PageContainer>
 	);
 }

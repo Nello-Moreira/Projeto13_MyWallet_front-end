@@ -20,4 +20,16 @@ const postSignUp = data => axiosBase.post('/sign-up', data);
 const postTransaction = (data, token) =>
 	axiosBase.post('/transactions', data, authorizationHeader(token));
 
-export { postLogin, postSignUp, postTransaction };
+const getTransactions = token =>
+	axiosBase.get('/transactions', authorizationHeader(token));
+
+const logoutFromServer = ({ userId, token }) =>
+	axiosBase.post('/logout', { userId }, authorizationHeader(token));
+
+export {
+	postLogin,
+	postSignUp,
+	postTransaction,
+	getTransactions,
+	logoutFromServer,
+};
