@@ -9,8 +9,27 @@ import AddIncomeButton from '../components/buttons/AddIncomeButton';
 import AddExpenseButton from '../components/buttons/AddExpenseButton';
 import LogoutButton from '../components/buttons/LogoutButton';
 
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import routes from './routes';
+
+import CircleLoader from '../components/loaders/CircleLoader';
+
 export default function TransactionsPage({ user }) {
-	return (
+	const history = useHistory();
+	const [pageFirstLoad, setPageFirstLoad] = useState(true);
+
+	useEffect(() => {
+		if (!user.token) {
+			history.push(routes.login);
+		}
+
+		setPageFirstLoad(false);
+	}, [user]);
+
+	return pageFirstLoad ? (
+		<CircleLoader />
+	) : (
 		<PageContainer verticalAlignment={'space-between'}>
 			<PageTitleContainer>
 				<PageTitle>{`Olá, ${user.name}`}</PageTitle>
