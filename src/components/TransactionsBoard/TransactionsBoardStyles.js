@@ -17,7 +17,7 @@ const NoContentWarning = styled.div`
 	color: rgba(134, 134, 134, 1);
 	text-align: center;
 	width: 100%;
-	padding: 20%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
