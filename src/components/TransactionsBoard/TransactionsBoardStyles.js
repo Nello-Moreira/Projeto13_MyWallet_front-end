@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 const WhiteBoard = styled.div`
 	box-sizing: border-box;
-	height: 100%;
+	height: 70%;
 	width: 100%;
 	background-color: rgb(255, 255, 255);
 	border-radius: 5px;
 	padding: 10px;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
-	overflow-y: auto;
 `;
 
 const NoContentWarning = styled.div`
@@ -21,6 +21,13 @@ const NoContentWarning = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+`;
+
+const TransactionsContainer = styled.div`
+	height: 90%;
+	display: flex;
+	justify-content: space-between;
+	overflow-y: auto;
 `;
 
 const LeftColumn = styled.div`
@@ -51,11 +58,24 @@ const TransactionValueColumn = styled(InfoColumn)`
 	text-align: right;
 `;
 
+const Balance = styled.div`
+	font-size: 17px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+
+	span:first-child {
+		font-weight: 700;
+	}
+`;
+
 export {
 	WhiteBoard,
 	NoContentWarning,
+	TransactionsContainer,
 	LeftColumn,
 	DateColumn,
 	DescriptionColumn,
 	TransactionValueColumn,
+	Balance,
 };

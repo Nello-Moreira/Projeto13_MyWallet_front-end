@@ -2,8 +2,6 @@ import FormStyle from './FormStyle';
 import InputStyle from './InputStyle';
 import StandardButton from '../buttons/StandardButton';
 
-import { useState } from 'react';
-
 export default function CustomForm({
 	formInfos,
 	saveInputsState,

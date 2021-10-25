@@ -16,7 +16,7 @@ const PageTitleContainer = styled.div`
 	box-sizing: border-box;
 	width: 100%;
 	max-width: 750px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
