@@ -10,7 +10,11 @@ export default function CustomForm({
 	buttonText = 'Enviar',
 }) {
 	const inputModifier = (event, field, changingInput) => {
-		changingInput.value = event.target.value;
+		if (changingInput.type === 'number') {
+			changingInput.value = event.target.value.replace('-', '');
+		} else {
+			changingInput.value = event.target.value;
+		}
 
 		const newInputsState = formInfos.map(input => {
 			if (input.field === field) return changingInput;

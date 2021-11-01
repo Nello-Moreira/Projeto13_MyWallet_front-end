@@ -5,7 +5,7 @@ const LinkButtonStyle = styled.button`
 	font-size: 17px;
 	color: rgb(255, 255, 255);
 	text-align: left;
-	width: 155px;
+	width: 49%;
 	height: 114px;
 	background-color: #a328d6;
 	border: 1px solid #641385;

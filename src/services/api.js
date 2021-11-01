@@ -3,7 +3,7 @@ import axios from 'axios';
 const fiveSeconds = 5;
 
 const axiosBase = axios.create({
-	baseURL: 'http://localhost:4000',
+	baseURL: 'https://nello-my-wallet.herokuapp.com/',
 	timeout: fiveSeconds * 1000,
 });
 
