@@ -4,6 +4,7 @@ const WhiteBoard = styled.div`
 	box-sizing: border-box;
 	height: 70%;
 	width: 100%;
+	max-width: 750px;
 	background-color: rgb(255, 255, 255);
 	border-radius: 5px;
 	padding: 10px;

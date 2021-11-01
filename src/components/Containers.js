@@ -24,6 +24,7 @@ const PageTitleContainer = styled.div`
 
 const ButtonsContainer = styled.div`
 	width: 100%;
+	max-width: 750px;
 	margin-top: 15px;
 	display: flex;
 	align-items: center;
